@@ -5,7 +5,7 @@
 Point your phone at a waste item. The app identifies the material, shows an approximate scrap price in Rs/kg, and a Llama 3.2 1B model running on the phone with ExecuTorch explains how to prepare the item and whether it is worth selling. It runs on an Arm-based Android phone with no internet.
 
 - Demo video: _paste public link_
-- Final report: `docs/Kuppai-to-Kaasu_Final_Report.docx`
+- Final report: `docs/Kuppai-to-Kaasu_Report.docx`
 
 ---
 
