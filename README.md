@@ -196,7 +196,16 @@ The Phase 1 classifier is limited by its data: TrashNet has only four usable cla
 
 ## 8. Team
 
-_Team name · Team leader · Members · Institution_
+**Team name:** _add team name_
+**Institution / organisation:** _add institution_
+
+| Name | Role |
+|---|---|
+| Barath Kumar M | Team leader |
+| Banu Shree M | Team member |
+| Pragathi K | Team member |
+
+**Contact:** Barath Kumar M · +91 79048 11240 · barathkumar.9790@gmail.com
 
 ## 9. Licence and acknowledgements
 
