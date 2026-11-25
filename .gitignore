@@ -1,0 +1,7 @@
+*.pte
+*.model
+*.pth
+build/
+.gradle/
+.idea/
+local.properties

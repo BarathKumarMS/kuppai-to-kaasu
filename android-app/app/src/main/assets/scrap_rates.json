@@ -1,0 +1,59 @@
+{
+  "_note": "Approximate indicative scrap rates in Rs per kg for India, compiled from public price listings and tender reserve prices. Not live market prices. Rates vary by city, quality, quantity and dealer. Last reviewed 24 Nov 2026.",
+  "currency": "INR",
+  "unit": "kg",
+  "classes": {
+    "plastic": {
+      "display_name": "Plastic",
+      "min": 8,
+      "max": 25,
+      "typical": 15,
+      "subtypes": [
+        {"name": "Mixed plastic scrap", "min": 8, "max": 25},
+        {"name": "Clean household plastic containers (best price)", "min": 15, "max": 25}
+      ],
+      "prep": "Empty, rinse and dry. Remove caps and labels if easy. Keep PET bottles separate from hard plastic."
+    },
+    "paper_cardboard": {
+      "display_name": "Paper and cardboard",
+      "min": 5,
+      "max": 20,
+      "typical": 12,
+      "subtypes": [
+        {"name": "Newspaper", "min": 12, "max": 20},
+        {"name": "White paper", "min": 10, "max": 18},
+        {"name": "Cardboard / carton", "min": 5, "max": 12}
+      ],
+      "prep": "Keep dry and clean. Flatten boxes and tie newspapers in bundles. Wet or oily paper is worth little."
+    },
+    "metal": {
+      "display_name": "Metal",
+      "min": 18,
+      "max": 850,
+      "typical": 35,
+      "subtypes": [
+        {"name": "Tin / cans", "min": 18, "max": 30},
+        {"name": "Iron", "min": 28, "max": 42},
+        {"name": "Steel", "min": 35, "max": 55},
+        {"name": "Aluminium", "min": 100, "max": 190},
+        {"name": "Copper", "min": 650, "max": 850}
+      ],
+      "prep": "Rinse cans and remove food. Separate by metal type: a magnet sticks to iron and steel but not to aluminium or copper. Aluminium and copper fetch far more."
+    },
+    "glass": {
+      "display_name": "Glass",
+      "min": 1,
+      "max": 4,
+      "typical": 2,
+      "subtypes": [
+        {"name": "Glass bottles and jars", "min": 1, "max": 4}
+      ],
+      "prep": "Rinse and keep whole bottles. Do not mix with ceramics or window glass. Wrap broken glass in paper before handing it over."
+    }
+  },
+  "fallback": {
+    "display_name": "Not sure",
+    "message": "I am not sure what this is. Try another angle with good light, or ask by typing the item name."
+  },
+  "confidence_threshold": 0.60
+}
