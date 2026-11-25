@@ -171,18 +171,10 @@ The Phase 1 classifier is limited by its data: TrashNet has only four usable cla
 - Unit tests for the classifier and prompt builder, a continuous build, and a signed release APK.
 - A user study with households and scrap dealers.
 
-### 7.8 Suggested schedule (Phase 2 runs to 5 February 2027 for shortlisted teams)
-
-| Period | Focus |
-|---|---|
-| Month 1 | Collect and label the custom dataset, add the new classes and the "unknown" class, retrain, and re-measure |
-| Month 2 | Offline voice, Tamil and Hindi, prompt grounding and rate-table fixes |
-| Final weeks | Benchmarks against a baseline, user testing, report and demo |
-
 ## 8. Team
 
 **Team name:** _add team name_
-**Institution / organisation:** _add institution_
+**Institution / organisation:** Madras Institute of Technology, Anna University
 
 | Name | Role |
 |---|---|
