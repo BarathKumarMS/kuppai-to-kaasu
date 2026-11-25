@@ -103,35 +103,20 @@ Model load time on the phone was about 0.5 s. All four photos were classified co
 
 The Llama `.pte` (784 MB), `tokenizer.model` and `.pth` files are **not** stored in the repository (see `.gitignore`).
 
-## 6. Reproduce
+## 6. Implementation
 
-Requirements: Windows with WSL2 Ubuntu 22.04 (or a Linux machine), Android Studio, an arm64 Android phone, Hugging Face access to Llama 3.2 (licence accepted). Internet is needed only on the development machine.
+Development used a Windows laptop with WSL2 Ubuntu 22.04, Android Studio, and an arm64 Android phone (realme P4 Pro 5G). Internet was needed only on the development machine; the finished app runs fully offline. The steps below are what we did, in order.
 
-1. **Export the LLM** (Python 3.11 to 3.15, ExecuTorch 1.6.0):
-   ```bash
-   python3.12 -m venv ~/venv && source ~/venv/bin/activate
-   pip install executorch                         # 1.6.0
-   git clone https://github.com/pytorch/executorch.git ~/executorch
-   cd ~/executorch && git checkout v1.6.0 && git submodule update --init --recursive
-   bash examples/models/llama/install_requirements.sh
-   hf auth login
-   hf download meta-llama/Llama-3.2-1B-Instruct --include "original/*" --local-dir ~/.llama/checkpoints/Llama3.2-1B-Instruct
-   export CK=$HOME/.llama/checkpoints/Llama3.2-1B-Instruct/original
-   python3 -m examples.models.llama.export_llama --checkpoint $CK/consolidated.00.pth --params $CK/params.json \
-     -kv --use_sdpa_with_kv_cache -X --xnnpack-extended-ops -qmode 8da4w --group_size 64 -d fp32 \
-     --metadata '{"get_bos_id":128000, "get_eos_ids":[128009, 128001, 128006, 128007]}' \
-     --embedding-quantize 4,32 --output_name="llama3_1B_kv_sdpa_xnn_qe_4_64_1024_embedding_4bit.pte" \
-     --max_seq_length 1024 --max_context_length 1024
-   ```
-2. **Push the model to the phone** (USB debugging on):
-   ```bash
-   adb shell mkdir -p /data/local/tmp/llama
-   adb push llama3_1B_kv_sdpa_xnn_qe_4_64_1024_embedding_4bit.pte /data/local/tmp/llama/
-   adb push tokenizer.model /data/local/tmp/llama/
-   ```
-3. **Classifier:** run `training/train_waste_classifier_kaggle.ipynb` (Kaggle, GPU T4, internet on) or use the provided `waste_classifier.tflite` and `labels.txt` (order: glass, metal, paper_cardboard, plastic). Input is 1x256x256x3 float32, raw 0-255 pixels.
-4. **Build the app:** open `android-app/` in Android Studio (JVM 21), sync, and run on the phone. The app uses the prebuilt `org.pytorch:executorch-android` library.
-5. In the app settings choose the `.pte` and `tokenizer.model` from `/data/local/tmp/llama`, model type Llama 3, backend XNNPACK. Turn on airplane mode, tap the camera icon, and scan an item.
+1. **Set up the export environment.** We created a Python 3.12 virtual environment in WSL2 Ubuntu, installed ExecuTorch 1.6.0, cloned the ExecuTorch repository at the v1.6.0 tag with its submodules, and installed the Llama example requirements.
+2. **Downloaded Llama 3.2 1B Instruct.** After accepting the Llama 3.2 licence on Hugging Face and logging in, we downloaded the original checkpoint files (`consolidated.00.pth` and `params.json`).
+3. **Exported the language model to ExecuTorch.** We exported the checkpoint to a `.pte` file with the XNNPACK backend for Arm CPUs, using a KV cache and SDPA, 8-bit dynamic activation and 4-bit weight quantisation (group size 64), 4-bit embedding quantisation, and a maximum sequence and context length of 1024. We also set the Llama 3 begin and end token ids in the model metadata. The resulting file is 784 MB.
+4. **Copied the model to the phone.** With USB debugging on, we used adb to create `/data/local/tmp/llama` on the phone and copied the `.pte` file and `tokenizer.model` into it.
+5. **Trained the waste classifier.** On Kaggle (GPU T4) we trained a MobileNetV2 classifier on TrashNet for four classes (glass, metal, paper_cardboard, plastic), evaluated it on a held-out test set of 359 images (94.71% accuracy), and converted it to a float16 TFLite model of 4.52 MB. The model takes a 1x256x256x3 float32 input with raw 0-255 pixel values. The class order is saved in `labels.txt`.
+6. **Built the Android app.** We started from the LlamaDemo project (Kotlin, Jetpack Compose) in Android Studio (JVM 21) and added the scan feature: camera and gallery input, `WasteClassifier` for the TFLite model, and `ScrapAdvisor`, which uses `scrap_rates.json` and `prompt_template.txt` to build the prompt. We added the 0.60 confidence threshold, so below it the app says it is not sure and does not call Llama. The app uses the prebuilt `org.pytorch:executorch-android` library.
+7. **Installed and configured the app.** We ran the app on the phone, and in its settings selected the `.pte` and `tokenizer.model` from `/data/local/tmp/llama`, with model type Llama 3 and backend XNNPACK.
+8. **Tested offline.** With airplane mode on, we scanned one real item per class (plastic lid, steel bowl, cardboard box, glass jar), recorded the classification time, Llama speed and generation time (section 3), and saved screenshots in `docs/screenshots/`.
+
+The full build log, including the problems we hit and how we fixed them, is in `SETUP_LOG.md`.
 
 ## 7. Future work and improvement plan
 
