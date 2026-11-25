@@ -173,8 +173,8 @@ The Phase 1 classifier is limited by its data: TrashNet has only four usable cla
 
 ## 8. Team
 
-**Team name:** _add team name_
-**Institution / organisation:** Madras Institute of Technology, Anna University
+**Team name:** Xenon
+**Institution / Organisation:** Madras Institute of Technology, Anna University
 
 | Name | Role |
 |---|---|
@@ -182,8 +182,5 @@ The Phase 1 classifier is limited by its data: TrashNet has only four usable cla
 | Banu Shree M | Team member |
 | Pragathi K | Team member |
 
-**Contact:** Barath Kumar M · +91 79048 11240 · barathkumar.9790@gmail.com
+**Contact:** Barath Kumar M | +91 79048 11240 | barathkumar.9790@gmail.com
 
-## 9. Licence and acknowledgements
-
-Code: _choose a licence (e.g. MIT)_. The app is based on Meta's ExecuTorch Llama demo (`meta-pytorch/executorch-examples`; see its licence). Llama models are subject to the Meta Llama Community Licence. Classifier trained on TrashNet.
