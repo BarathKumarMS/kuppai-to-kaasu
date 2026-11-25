@@ -87,19 +87,16 @@ Model load time on the phone was about 0.5 s. All four photos were classified co
 
 ## 5. Repository contents
 
-```
-.
-├── README.md
-├── SETUP_LOG.md                  # full build log, problems and fixes
-├── android-app/                  # LlamaDemo-based Android project (Kotlin, Jetpack Compose) with the scan feature
-│   └── app/src/main/assets/      # waste_classifier.tflite, labels.txt, scrap_rates.json, prompt_template.txt
-├── training/
-│   └── train_waste_classifier_kaggle.ipynb
-└── docs/
-    ├── Kuppai-to-Kaasu_Final_Report.docx
-    ├── confusion_matrix.png
-    └── screenshots/
-```
+| Path | Description |
+|---|---|
+| `README.md` | Project overview, results and plan |
+| `SETUP_LOG.md` | Full build log, problems and fixes |
+| `android-app/` | LlamaDemo-based Android project (Kotlin, Jetpack Compose) with the scan feature |
+| `android-app/app/src/main/assets/` | `waste_classifier.tflite`, `labels.txt`, `scrap_rates.json`, `prompt_template.txt` |
+| `training/train_waste_classifier_kaggle.ipynb` | Kaggle notebook used to train the classifier |
+| `docs/Kuppai-to-Kaasu_Report.docx` | Final report |
+| `docs/confusion_matrix.png` | Confusion matrix image |
+| `docs/screenshots/` | On-device test screenshots |
 
 The Llama `.pte` (784 MB), `tokenizer.model` and `.pth` files are **not** stored in the repository (see `.gitignore`).
 
@@ -184,3 +181,6 @@ The Phase 1 classifier is limited by its data: TrashNet has only four usable cla
 
 **Contact:** Barath Kumar M | +91 79048 11240 | barathkumar.9790@gmail.com
 
+## 9. Demo video
+
+Watch the demo here: [Kuppai-to-Kaasu demo video](https://drive.google.com/file/d/1qDL9zwBpebPk1MWB-De68vYnnQ8iaNDO/view?usp=drivesdk)
